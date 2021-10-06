@@ -1,0 +1,69 @@
+<mat-toolbar color="primary" class="main-toolbar">
+    <div class="pr-4 pl-4 header-toolbar">
+        <span class="table-heading">Users</span>
+        <div class="toolbar-buttons">
+            <button class="custom-button mr-3" (click)="addNewUser()" mat-raised-button>Add New User</button>
+            <div class="search-input">
+                <mat-form-field appearance="standard">
+                    <mat-label>Search</mat-label>
+                    <input #search matInput type="text" (keyup)="applyFilter(search.value)">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+    </div>
+
+</mat-toolbar>
+
+<mat-toolbar color="primary">
+
+</mat-toolbar>
+
+<div class="p-4 moved-up">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="firstName">
+                <th scope="col" mat-header-cell *matHeaderCellDef> First Name </th>
+                <td data-label="First Name" scope="row" mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <th scope="col" mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td data-label="Last Name" mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="emailId">
+                <th scope="col" mat-header-cell *matHeaderCellDef> Email ID </th>
+                <td data-label="Email ID" mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phoneNumber">
+                <th scope="col" mat-header-cell *matHeaderCellDef> Phone Number </th>
+                <td data-label="Phone Number" mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th scope="col" mat-header-cell *matHeaderCellDef> </th>
+                <td data-label="Action" mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary" (click)="onEditClicked(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="warn" (click)="onDeleteClicked(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
+    </div>
+</div>
